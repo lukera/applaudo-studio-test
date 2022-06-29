@@ -1,0 +1,40 @@
+<template>
+    <lightning-card class="main-content">
+        <div class="slds-grid slds-wrap">
+
+            <!-- TITLE -->
+            <div class="slds-col slds-size_3-of-3 slds-align_absolute-center">
+                <h1 class="title">Create Expenses</h1>
+            </div>
+
+            <!-- FORM -->
+            <div class="slds-col slds-size_3-of-3 slds-align_absolute-center form">
+                <form>
+                    <lightning-input type="text" value={rec.Name} name="name" label="Name" onchange={handleNameChange}></lightning-input>
+                    <lightning-combobox
+                        name="category"
+                        label="Category"
+                        placeholder="Category"
+                        options={categories}
+                        onchange={handleCategoryChange}>
+                    </lightning-combobox>
+                    <lightning-input type="date" value={rec.Expense_Date__c} name="expenseDate" label="Expense Date" onchange={handleExpenseDateChange}></lightning-input>
+                    <lightning-input type="number" value={rec.Amount__c} name="amount" label="Amount" onchange={handleAmountChange}></lightning-input>
+                    <lightning-input type="checkbox" label="Is recurrent?" name="isRecorrent" onclick={handleRecurrent}></lightning-input>
+                    <lightning-combobox
+                        name="progress"
+                        placeholder="Select Base"
+                        options={options}
+                        disabled={isRecurrentAvailable} 
+                        required={isRecurrentRequired}
+                        onchange={handleBaseChange}>
+                    </lightning-combobox>
+                    <lightning-input type="date" value={rec.Due_Date__c} name="recorrentDate" label="Final Date" disabled={isRecurrentAvailable} onchange={handleDueDateChange} required={isRecurrentRequired}></lightning-input>
+                    <lightning-button class="slds-m-top_small slds-align_absolute-center" label="Create Expense" variant="brand" onclick={handleClick}></lightning-button>
+                </form>
+            </div>
+
+        </div>
+    
+    </lightning-card>
+</template>
